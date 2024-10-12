@@ -1,0 +1,106 @@
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .card-container {
+    width: 100%;
+    max-width: 900px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  .card-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  
+  .left-section,
+  .right-section {
+    padding: 30px;
+    flex: 1;
+  }
+  
+  .logo-container {
+    text-align: center;
+  }
+  
+  .logo {
+    width: 150px;
+  }
+  
+  .title {
+    margin-top: 20px;
+    margin-bottom: 40px;
+  }
+  
+  .form-outline {
+    margin-bottom: 20px;
+    position: relative;
+  }
+  
+  .password-container {
+    position: relative;
+  }
+  
+  .password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  
+  .signup-button-container {
+    text-align: center;
+  }
+  
+  .btn-block {
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  .existing-account {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .right-section {
+    background: linear-gradient(120deg,  #2c6b85, #2a4e6d, #233653);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .info-container {
+    text-align: center;
+  }
+  
+  .info-title {
+    margin-bottom: 20px;
+  }
+  
+  .info-text {
+    font-size: 14px;
+  }
+  
+  @media (max-width: 768px) {
+    .card-content {
+      flex-direction: column;
+    }
+  
+    .right-section {
+      display: none;
+    }
+  }
+  
