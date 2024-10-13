@@ -11,7 +11,6 @@ interface Skill {
   photo?: string;
 }
 
-
 interface CardSkillsProps {
   skill: Skill;
   onDelete: (id: number) => void;
@@ -29,7 +28,6 @@ const CardSkills: React.FC<CardSkillsProps> = ({ skill, onDelete, onEdit }) => {
   const skillTechnologies = ['Java', 'React', 'Node.js', 'SQL'];
   const skillLevels = ['Básico', 'Intermediário', 'Avançado'];
 
-
   const handleDelete = async () => {
     try {
       if (!skill || !skill.id) {
@@ -44,7 +42,6 @@ const CardSkills: React.FC<CardSkillsProps> = ({ skill, onDelete, onEdit }) => {
     }
   };
 
-
   const handleEdit = async () => {
     const updatedSkill = {
       id: editedSkill.id,
@@ -55,7 +52,6 @@ const CardSkills: React.FC<CardSkillsProps> = ({ skill, onDelete, onEdit }) => {
     };
   
     try {
-      console.log("Updated Skill:", updatedSkill);
       await updateSkillInfo(updatedSkill.id, updatedSkill);
       onEdit(updatedSkill); 
       setShowEditModal(false); 
@@ -64,7 +60,6 @@ const CardSkills: React.FC<CardSkillsProps> = ({ skill, onDelete, onEdit }) => {
     }
   };
 
-  
   const handlePhotoChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -225,7 +220,7 @@ const CardSkills: React.FC<CardSkillsProps> = ({ skill, onDelete, onEdit }) => {
         </Modal.Footer>
       </Modal>
 
-      {/* Modal de Confirmação de Deleção */}
+     
       <Modal
         show={showConfirmModal}
         onHide={() => setShowConfirmModal(false)}

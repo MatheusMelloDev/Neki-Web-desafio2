@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BiShow, BiHide } from 'react-icons/bi';
 import './login.css';
@@ -13,7 +13,7 @@ const Login: React.FC = () => {
   const [emailError, setEmailError] = useState('');
   const [loginError, setLoginError] = useState('');
 
-  const { login } = useAuth(); // Usando o hook para pegar a função de login
+  const { login } = useAuth(); 
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -72,7 +72,7 @@ const Login: React.FC = () => {
       return;
     }
     try {
-      await login({ email, senha: password }); // Usando a função login do contexto
+      await login({ email, senha: password }); 
       navigate('/home');
     } catch (error) {
       setLoginError('Erro ao fazer login. Verifique suas credenciais e tente novamente.');

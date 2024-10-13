@@ -1,11 +1,10 @@
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Container, Row, Col, Pagination, Button } from 'react-bootstrap';
 import CardSkills from './cardSkills';
 import RegisterModal from './registerModal';
-import Filter from '../components/filter';  // Importe o componente de filtro
+import Filter from '../components/filter';  
 import { getSkills } from '../services/apiService';
 
-// Definindo o tipo Skill diretamente no componente
 interface Skill {
   id: number;
   nome: string;
@@ -13,61 +12,55 @@ interface Skill {
   tecnologia: string;
   nivel: string;
 }
+
 interface LayoutProps {
   children?: React.ReactNode;
 }
 
-
-
-  const Layout: React.FC<LayoutProps> = () => {
-  const [skills, setSkills] = useState<Skill[]>([]);  // Tipo correto de skills
-  const [filteredSkills, setFilteredSkills] = useState<Skill[]>([]);  // Tipo correto de skills filtradas
-  const [currentPage, setCurrentPage] = useState<number>(1);  // Tipo correto de número de página
+const Layout: React.FC<LayoutProps> = () => {
+  const [skills, setSkills] = useState<Skill[]>([]);
+  const [filteredSkills, setFilteredSkills] = useState<Skill[]>([]);
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const skillsPerPage = 8;
-  const [showRegisterModal, setShowRegisterModal] = useState<boolean>(false);  // Controle do modal
+  const [showRegisterModal, setShowRegisterModal] = useState<boolean>(false);
 
-  // Função para buscar as skills da API
   const fetchSkills = async () => {
     try {
-      const data: Skill[] = await getSkills();  // Defina o tipo retornado pela API
-      setSkills(data);  // Atualiza as skills com o retorno da API
-      setFilteredSkills(data);  // Inicialmente, todas as skills são exibidas
+      const data: Skill[] = await getSkills();
+      setSkills(data);
+      setFilteredSkills(data);
     } catch (error) {
       console.error('Erro ao buscar habilidades:', error);
     }
   };
 
   useEffect(() => {
-    fetchSkills();  // Busca as skills ao montar o componente
+    fetchSkills();
   }, []);
 
-  // Função para deletar uma skill
   const handleDeleteSkill = (skillId: number) => {
-    setSkills((prevSkills) => prevSkills.filter((skill) => skill.id !== skillId));  // Atualiza o estado ao deletar
-    setFilteredSkills((prevSkills) => prevSkills.filter((skill) => skill.id !== skillId));  // Atualiza a lista filtrada
+    setSkills((prevSkills) => prevSkills.filter((skill) => skill.id !== skillId));
+    setFilteredSkills((prevSkills) => prevSkills.filter((skill) => skill.id !== skillId));
   };
 
-  // Função para editar uma skill
   const handleEditSkill = (updatedSkill: Skill) => {
     setSkills((prevSkills) =>
-      prevSkills.map((skill) => (skill.id === updatedSkill.id ? updatedSkill : skill))  // Atualiza a skill editada
+      prevSkills.map((skill) => (skill.id === updatedSkill.id ? updatedSkill : skill))
     );
     setFilteredSkills((prevSkills) =>
-      prevSkills.map((skill) => (skill.id === updatedSkill.id ? updatedSkill : skill))  // Atualiza a lista filtrada
+      prevSkills.map((skill) => (skill.id === updatedSkill.id ? updatedSkill : skill))
     );
   };
 
-  // Função para adicionar uma skill
   const handleSkillAdded = () => {
-    fetchSkills();  // Recarrega as skills após adicionar
+    fetchSkills();
     const totalPages = Math.ceil(skills.length / skillsPerPage);
-    setCurrentPage(totalPages);  // Vai para a última página
+    setCurrentPage(totalPages);
   };
 
-  // Paginação
   const indexOfLastSkill = currentPage * skillsPerPage;
   const indexOfFirstSkill = indexOfLastSkill - skillsPerPage;
-  const currentSkills = filteredSkills.slice(indexOfFirstSkill, indexOfLastSkill);  // Skills paginadas
+  const currentSkills = filteredSkills.slice(indexOfFirstSkill, indexOfLastSkill);
   const totalPages = Math.ceil(filteredSkills.length / skillsPerPage);
 
   return (
@@ -81,28 +74,25 @@ interface LayoutProps {
           <Button
             variant="primary"
             onClick={() => setShowRegisterModal(true)}
-            className="me-3"  // Margem à direita
+            className="me-3"
           >
             Adicionar Nova Skill
           </Button>
 
-          {/* Barra de pesquisa */}
           <div style={{ minWidth: '300px' }}>
             <Filter skills={skills} setFilteredSkills={setFilteredSkills} />
           </div>
         </div>
       </div>
 
-      {/* Renderização das skills paginadas */}
       <Row className="justify-content-center mt-4" style={{ width: '100%' }}>
-        {currentSkills.map((skill, index) => (
-          <Col xs={12} sm={6} md={3} className="d-flex justify-content-center mb-4" key={index}>
+        {currentSkills.map((skill) => (
+          <Col xs={12} sm={6} md={3} className="d-flex justify-content-center mb-4" key={skill.id}>
             <CardSkills skill={skill} onDelete={handleDeleteSkill} onEdit={handleEditSkill} />
           </Col>
         ))}
       </Row>
 
-      
       <div className="d-flex justify-content-center mt-4">
         <Pagination>
           <Pagination.Prev onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1} />

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import Home from '../screens/home'; // Ajuste o caminho correto
+import Home from '../screens/home'; 
 import Login from '../screens/login';
 import Signup from '../screens/signup';
 import PageNotFound from '../screens/pageNotFound';
@@ -10,7 +10,6 @@ import Header from '../components/header';
 import Footer from '../components/footer';
 import { getSkills } from '../services/apiService';
 
-// Defina a interface Skill diretamente aqui
 interface Skill {
   id: number;
   nome: string;
@@ -20,13 +19,13 @@ interface Skill {
 }
 
 const AppRoutes: React.FC = () => {
-  const [skillsData, setSkillsData] = useState<Skill[]>([]); // Definindo o tipo correto para o estado
+  const [skillsData, setSkillsData] = useState<Skill[]>([]); 
 
-  // Buscar as skills na montagem do componente
+  
   useEffect(() => {
     const fetchSkills = async () => {
-      const skills: Skill[] = await getSkills();  // Função para buscar skills
-      setSkillsData(skills); // Agora o estado está tipado corretamente
+      const skills: Skill[] = await getSkills();  
+      setSkillsData(skills); 
     };
 
     fetchSkills();
@@ -41,17 +40,17 @@ const AppRoutes: React.FC = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           
-          {/* Todas as rotas protegidas com layout completo */}
+     
           <Route
             path="/home"
             element={
               <ProtectedRoute>
-                <Home skills={skillsData} /> {/* Passa as skills diretamente para o Home */}
+                <Home skills={skillsData} /> 
               </ProtectedRoute>
             }
           />
 
-          {/* Página não encontrada */}
+        
           <Route path="*" element={<PageNotFound />} />
         </Routes>
         <Footer />

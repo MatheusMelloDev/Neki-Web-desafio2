@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Modal, Form, Button, Alert } from 'react-bootstrap';
 import { uploadPhoto, registerSkills } from '../services/apiService';
 
-// Definindo o tipo Skill
+
 interface Skill {
   nome: string;
   descricao: string;
@@ -10,12 +10,12 @@ interface Skill {
   nivel: string;
 }
 
-// Definindo as props do componente RegisterModal
+
 interface RegisterModalProps {
   show: boolean;
   handleClose: () => void;
   handleSubmit: (newSkill: Omit<Skill, 'id'>) => void;
-  initialData?: Skill; // Torna initialData opcional para edição
+  initialData?: Skill; 
 }
 
 const RegisterModal: React.FC<RegisterModalProps> = ({ show, handleClose, handleSubmit, initialData }) => {
@@ -25,11 +25,11 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ show, handleClose, handle
     tecnologia: '',
     nivel: '',
   });
-  const [selectedFile, setSelectedFile] = useState<File | null>(null); // Tipar corretamente o arquivo
+  const [selectedFile, setSelectedFile] = useState<File | null>(null); 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [showError, setShowError] = useState(false);
 
-  // Se os dados iniciais forem fornecidos, carregar a skill para edição
+ 
   useEffect(() => {
     if (initialData) {
       setNewSkill({ ...initialData });

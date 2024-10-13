@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 import { useAuth } from '../context/authContext';
 
 interface ProtectedRouteProps {
-  children: React.ReactNode; // Certificando que children é tipado como ReactNode
+  children: React.ReactNode;
 }
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
@@ -13,7 +13,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
     return <Navigate to="/login" />;
   }
 
-  return <>{children}</>; // Renderizando os elementos filhos se o usuário estiver autenticado
+  return <>{children}</>; 
 };
 
 export default ProtectedRoute;

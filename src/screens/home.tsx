@@ -6,7 +6,7 @@ import CardSkills from '../components/cardSkills';
 import RegisterButton from '../components/registerButton';
 import Layout from '../components/Layout';
 
-// Defina a interface Skill aqui também
+
 interface Skill {
   id: number;
   nome: string;
@@ -16,11 +16,11 @@ interface Skill {
 }
 
 interface HomeProps {
-  skills: Skill[];  // Definindo o tipo da prop 'skills'
+  skills: Skill[];  
 }
 
 const Home: React.FC<HomeProps> = ({ skills }) => {
-  const [localSkills, setLocalSkills] = useState<Skill[]>(skills); // Tipando corretamente o estado
+  const [localSkills, setLocalSkills] = useState<Skill[]>(skills); 
   const [showModal, setShowModal] = useState(false);
   const [message, setMessage] = useState<{ type: string; text: string } | null>(null);
 

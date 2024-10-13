@@ -14,7 +14,7 @@ const Signup: React.FC = () => {
   const [emailError, setEmailError] = useState('');
   const [role, setRole] = useState('');
 
-  const { register } = useAuth(); // Usando o hook useAuth para autenticação
+  const { register } = useAuth(); 
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
